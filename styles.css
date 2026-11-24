@@ -293,6 +293,33 @@ button:disabled {
     flex: 0 0 auto;
 }
 
+
+/* Confetti celebration */
+.confetti {
+    position: fixed;
+    top: -20px;
+    z-index: 9999;
+    pointer-events: none;
+
+    width: 10px;
+    height: 16px;
+
+    animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(900deg);
+        opacity: 0;
+    }
+}
+
+
 #message,
 #score {
     flex: 0 0 auto;
