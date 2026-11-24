@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher or Lower</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="game-container">
+
+        <h1>Higher or Lower?</h1>
+        <p>Ace is low. Same value means you continue!</p>
+
+        <div class="cards-wrapper">
+            <div class="cards-row" id="cardsRow"></div>
+        </div>
+
+        <div class="buttons">
+            <button id="higher" onclick="makeGuess('higher')">
+                Higher ↑
+            </button>
+
+            <button id="lower" onclick="makeGuess('lower')">
+                Lower ↓
+            </button>
+        </div>
+
+        <p id="message">Good luck!</p>
+
+        <p id="score">Cards revealed: 1 / 10</p>
+
+        <button id="playAgain" onclick="startGame()">
+            Play Again
+        </button>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
