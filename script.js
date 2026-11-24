@@ -291,6 +291,7 @@ function startGame() {
     document.getElementById("lower").disabled = false;
 
     document.getElementById("playAgain").style.display = "none";
+    document.getElementById("score").style.display = "block";
 }
 
 
@@ -388,6 +389,7 @@ function endGame() {
     document.getElementById("higher").disabled = true;
     document.getElementById("lower").disabled = true;
 
+    document.getElementById("score").style.display = "none";
     document.getElementById("playAgain").style.display = "block";
 }
 
