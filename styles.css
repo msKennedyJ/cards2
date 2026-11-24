@@ -268,16 +268,17 @@ button:disabled {
     font-size: 19px;
     font-weight: bold;
 }
-
-/* Play Again */
 #playAgain {
     background: #10b981;
     width: 100%;
     max-width: 450px;
-    display: none;
-    flex: 0 0 auto;
-}
 
+    display: none;
+
+    /* Prevent the button from growing */
+    flex: 0 0 auto;
+    flex-shrink: 0;
+}
 #playAgain:hover {
     background: #059669;
 }
