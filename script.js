@@ -89,6 +89,78 @@ function playLoseSound() {
     oscillator.stop(now + 0.8);
 }
 
+// Celebratory victory sound
+function playWinSound() {
+    const audio = getAudioContext();
+    const now = audio.currentTime;
+
+    // A little victory melody
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+
+    notes.forEach((frequency, index) => {
+        const oscillator = audio.createOscillator();
+        const volume = audio.createGain();
+
+        const start = now + index * 0.16;
+
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(frequency, start);
+
+        volume.gain.setValueAtTime(0.0001, start);
+        volume.gain.exponentialRampToValueAtTime(0.15, start + 0.03);
+        volume.gain.exponentialRampToValueAtTime(0.0001, start + 0.45);
+
+        oscillator.connect(volume);
+        volume.connect(audio.destination);
+
+        oscillator.start(start);
+        oscillator.stop(start + 0.46);
+    });
+}
+
+
+// Create falling confetti
+function launchConfetti() {
+    const colours = [
+        "#facc15",
+        "#ef4444",
+        "#3b82f6",
+        "#22c55e",
+        "#ec4899",
+        "#a855f7",
+        "#ffffff"
+    ];
+
+    for (let i = 0; i < 120; i++) {
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.backgroundColor =
+            colours[Math.floor(Math.random() * colours.length)];
+
+        piece.style.animationDuration =
+            (2.5 + Math.random() * 2) + "s";
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+        piece.style.width =
+            (6 + Math.random() * 8) + "px";
+
+        piece.style.height =
+            (8 + Math.random() * 12) + "px";
+
+        document.body.appendChild(piece);
+
+        // Remove the confetti after its animation
+        setTimeout(() => {
+            piece.remove();
+        }, 5000);
+    }
+}
+
 
 // Create a standard 52-card deck
 function createDeck() {
