@@ -1,74 +1,59 @@
 
-/* ================================
-   GENERAL PAGE STYLING
-================================ */
-
+/* Reset */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #111827;
     min-height: 100vh;
-    padding: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background:
-        radial-gradient(circle at 50% 10%, #352052, transparent 55%),
-        #160e27;
-    font-family: Georgia, serif;
-    color: #fff1d6;
+    padding: 30px;
 }
 
 .game-container {
+    background: #1f2937;
     width: 100%;
     max-width: 1250px;
-    min-height: 650px;
-    padding: 45px;
+    height: 650px;
+    padding: 55px 45px;
+    border-radius: 20px;
+    border: 1px solid #374151;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 25px;
-    background: #241638;
-    border: 2px solid #d99b45;
-    border-radius: 18px;
-    box-shadow:
-        0 0 25px rgba(0, 0, 0, 0.5),
-        inset 0 0 35px rgba(217, 155, 69, 0.08);
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
-
-/* ================================
-   TITLE AND INTRODUCTION
-================================ */
-
+/* Heading */
 h1 {
-    margin: 0;
-    color: #ffbd59;
+    color: #f9fafb;
     font-size: 42px;
     text-align: center;
-    letter-spacing: 2px;
-    text-shadow: 2px 3px 0 #712c60;
 }
 
-.game-container > p {
-    margin: 0;
+p {
+    color: #9ca3af;
+    font-size: 19px;
     text-align: center;
-    color: #f6d9b4;
-    font-size: 17px;
 }
 
-/* ================================
-   CARD LAYOUT
-================================ */
-
+/* Cards wrapper */
 .cards-wrapper {
     width: 100%;
     padding: 15px 0;
     overflow-x: auto;
 }
 
+/* Row of cards */
 .cards-row {
     display: flex;
     justify-content: center;
@@ -77,314 +62,248 @@ h1 {
     padding: 5px;
 }
 
+/* Card positioning */
 .card {
     width: 100px;
     height: 150px;
-    flex: 0 0 100px;
+    flex-shrink: 0;
+
     perspective: 1000px;
 }
 
+/* The rotating part of the card */
 .card-inner {
     position: relative;
     width: 100%;
     height: 100%;
+
     transform-style: preserve-3d;
     transition: transform 0.65s ease;
 }
 
+/* Flip the card */
 .card.flipped .card-inner {
     transform: rotateY(180deg);
 }
 
+/* Both card sides */
 .card-front,
 .card-back {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 9px;
+
+    border-radius: 10px;
+    overflow: hidden;
+
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    overflow: hidden;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ================================
-   CARD BACK - DÍA DE LOS MUERTOS
-================================ */
+/* --------------------------------
+   CARD BACK
+-------------------------------- */
 
 .card-back {
-    transform: rotateY(0deg);
-
-    background-color: #241638;
+    background-color: #a3132a;
 
     background-image:
-        radial-gradient(circle at 12% 12%,
-            #f5a623 0 3px, transparent 4px),
-        radial-gradient(circle at 88% 12%,
-            #e85d9e 0 3px, transparent 4px),
-        radial-gradient(circle at 12% 88%,
-            #39c6b5 0 3px, transparent 4px),
-        radial-gradient(circle at 88% 88%,
-            #f5a623 0 3px, transparent 4px),
         repeating-linear-gradient(
             45deg,
-            transparent 0 8px,
-            rgba(255, 255, 255, 0.035) 9px 10px
+            transparent 0px,
+            transparent 4px,
+            rgba(255,255,255,0.15) 4px,
+            rgba(255,255,255,0.15) 5px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(255,255,255,0.15) 4px,
+            rgba(255,255,255,0.15) 5px
         );
 
-    border: 3px solid #e9b65c;
-
-    box-shadow:
-        inset 0 0 0 4px #241638,
-        inset 0 0 0 6px #e9b65c;
+    border: 4px solid #f8e7c5;
 }
 
-/* Decorative inner border */
-
-.card-back::after {
-    content: "";
-    position: absolute;
-    inset: 10px;
-    border: 1px solid rgba(255, 221, 160, 0.8);
-    border-radius: 4px;
-    pointer-events: none;
-}
-
-/* ================================
-   CSS SUGAR SKULL
-================================ */
-
+/* Inner border */
 .card-back::before {
     content: "";
     position: absolute;
-    width: 64px;
-    height: 76px;
-    left: 50%;
+    inset: 7px;
+    border: 2px solid #f8e7c5;
+    border-radius: 4px;
+}
+
+/* Decorative centre */
+.card-back::after {
+    content: "✦";
+    position: absolute;
     top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 
-    background-color: #fff0d2;
-
-    background-image:
-
-        /* Left eye flower */
-        radial-gradient(circle,
-            #241638 0 3px,
-            #f5a623 4px 6px,
-            #e85d9e 7px 9px,
-            transparent 10px
-        ),
-
-        /* Right eye flower */
-        radial-gradient(circle,
-            #241638 0 3px,
-            #39c6b5 4px 6px,
-            #e85d9e 7px 9px,
-            transparent 10px
-        ),
-
-        /* Nose */
-        linear-gradient(45deg,
-            transparent 40%,
-            #241638 41% 60%,
-            transparent 61%
-        ),
-
-        /* Teeth and mouth */
-        repeating-linear-gradient(
-            90deg,
-            #241638 0 2px,
-            transparent 2px 6px
-        );
-
-    background-size:
-        23px 23px,
-        23px 23px,
-        10px 12px,
-        30px 7px;
-
-    background-position:
-        8px 20px,
-        33px 20px,
-        center 46px,
-        center 63px;
-
-    background-repeat: no-repeat;
-
-    border-radius: 48% 48% 42% 42% / 38% 38% 58% 58%;
-
-    clip-path: polygon(
-        0 10%,
-        15% 0,
-        30% 9%,
-        50% 0,
-        70% 9%,
-        85% 0,
-        100% 10%,
-        96% 65%,
-        80% 85%,
-        65% 100%,
-        35% 100%,
-        20% 85%,
-        4% 65%
-    );
-
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #f8e7c5;
+    font-size: 45px;
 }
 
-/* ================================
+/* --------------------------------
    CARD FRONT
-================================ */
+-------------------------------- */
 
 .card-front {
+    background: #fffdf7;
+    border: 1px solid #d1d5db;
+
     transform: rotateY(180deg);
-    background: #fff5e5;
-    color: #241638;
-    border: 3px solid #e9b65c;
 }
 
-.card-front .corner {
+/* Card corners */
+.card-corner {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 15px;
+
+    font-size: 20px;
     font-weight: bold;
-    line-height: 1.1;
+    line-height: 1.05;
 }
 
-.card-front .top-left {
-    top: 7px;
-    left: 7px;
+.card-corner.top {
+    top: 9px;
+    left: 9px;
 }
 
-.card-front .bottom-right {
-    bottom: 7px;
-    right: 7px;
+.card-corner.bottom {
+    bottom: 9px;
+    right: 9px;
     transform: rotate(180deg);
 }
 
-.card-front .suit {
+/* Centre suit */
+.card-center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 42px;
+    font-size: 58px;
 }
 
-.card-front .red {
-    color: #bd245c;
+/* Suit colours */
+.card-front.red {
+    color: #c1122f;
 }
 
-.card-front .black {
-    color: #241638;
+.card-front.black {
+    color: #111827;
 }
 
-/* ================================
-   GAME BUTTONS
-================================ */
+/* --------------------------------
+   BUTTONS
+-------------------------------- */
 
 .buttons {
     display: flex;
-    justify-content: center;
     gap: 20px;
     width: 100%;
     max-width: 450px;
 }
 
 button {
-    padding: 13px 25px;
-    border: 2px solid #f5c36a;
-    border-radius: 9px;
-    background: #a83b68;
-    color: #fff6df;
-    font-family: Georgia, serif;
-    font-size: 18px;
-    font-weight: bold;
+    padding: 17px;
+    border: none;
+    border-radius: 10px;
+
+    color: white;
+    font-size: 19px;
+    font-weight: 600;
+
     cursor: pointer;
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: 0.2s;
 }
 
 .buttons button {
     flex: 1;
 }
 
-button:hover:not(:disabled) {
-    background: #d34e7e;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+#higher {
+    background: #2563eb;
 }
 
-button:active:not(:disabled) {
-    transform: translateY(0);
+#higher:hover {
+    background: #1d4ed8;
+}
+
+#lower {
+    background: #dc2626;
+}
+
+#lower:hover {
+    background: #b91c1c;
+}
+
+button:hover {
+    transform: translateY(-3px);
 }
 
 button:disabled {
-    opacity: 0.45;
+    opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
-/* ================================
-   MESSAGE
-================================ */
-
+/* Message */
 #message {
-    min-height: 24px;
-    color: #ffbd59;
+    color: #60a5fa;
+    font-size: 22px;
+    font-weight: 600;
+    min-height: 28px;
+}
+
+/* Score */
+#score {
+    color: #f9fafb;
     font-size: 19px;
     font-weight: bold;
-    text-align: center;
 }
-
-/* ================================
-   SCORE AND PLAY AGAIN
-================================ */
-
-.bottom-area {
-    position: relative;
-    width: 100%;
-    max-width: 450px;
-    height: 55px;
-    flex: 0 0 55px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#score {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    color: #fff1d6;
-    font-size: 17px;
-}
-
 #playAgain {
-    position: absolute;
+    background: #10b981;
     width: 100%;
     max-width: 450px;
-    margin: 0;
+
     display: none;
-    flex: none;
-    background: #d58a27;
-    color: #241638;
+
+    /* Prevent the button from growing */
+    flex: 0 0 auto;
+    flex-shrink: 0;
+}
+#playAgain:hover {
+    background: #059669;
 }
 
-/* ================================
-   CONFETTI
-================================ */
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .card-inner {
+        transition: none;
+    }
+}
+.buttons {
+    flex: 0 0 auto;
+}
 
+
+/* Confetti celebration */
 .confetti {
     position: fixed;
     top: -20px;
     z-index: 9999;
     pointer-events: none;
+
     width: 10px;
     height: 16px;
+
     animation: confetti-fall linear forwards;
 }
 
@@ -400,41 +319,38 @@ button:disabled {
     }
 }
 
-/* ================================
-   SMALL SCREENS
-================================ */
 
-@media (max-width: 750px) {
-    body {
-        padding: 10px;
-    }
+#message,
+#score {
+    flex: 0 0 auto;
+}
+/* Score and Play Again share the same space */
+.bottom-area {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    height: 55px;
 
-    .game-container {
-        padding: 25px 15px;
-        min-height: 600px;
-        gap: 20px;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    h1 {
-        font-size: 32px;
-    }
+/* Score occupies the shared space */
+#score {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
 
-    .cards-row {
-        justify-content: flex-start;
-    }
+/* Play Again occupies exactly the same space */
+#playAgain {
+    position: absolute;
+    width: 100%;
+    max-width: 450px;
+    margin: 0;
 
-    .card {
-        width: 85px;
-        height: 128px;
-        flex-basis: 85px;
-    }
-
-    .buttons {
-        gap: 12px;
-    }
-
-    button {
-        padding: 12px 15px;
-        font-size: 16px;
-    }
+    display: none;
+    flex: none;
 }
