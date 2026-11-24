@@ -20,8 +20,8 @@ body {
 .game-container {
     background: #1f2937;
     width: 100%;
-    max-width: 850px;
-    min-height: 430px;
+    max-width: 900px;
+    min-height: 460px;
     padding: 35px;
     border-radius: 16px;
     border: 1px solid #374151;
@@ -42,7 +42,6 @@ h1 {
     text-align: center;
 }
 
-/* Paragraphs */
 p {
     color: #9ca3af;
     font-size: 16px;
@@ -68,67 +67,120 @@ p {
 /* Individual card */
 .card {
     position: relative;
-    width: 65px;
-    height: 105px;
+    width: 75px;
+    height: 115px;
     flex-shrink: 0;
 
     border-radius: 8px;
-    border: 2px solid #e5e7eb;
-    background: white;
+    overflow: hidden;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-weight: bold;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Card backs */
+/* --------------------------------
+   CARD BACK DESIGN
+-------------------------------- */
+
+/* Same back design for every card */
 .card-back {
-    border: 3px solid white;
-    background: repeating-linear-gradient(
-        45deg,
-        #b91c1c,
-        #b91c1c 5px,
-        #7f1d1d 5px,
-        #7f1d1d 10px
-    );
+    background-color: #a3132a;
+
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(255,255,255,0.15) 4px,
+            rgba(255,255,255,0.15) 5px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(255,255,255,0.15) 4px,
+            rgba(255,255,255,0.15) 5px
+        );
+
+    border: 3px solid #f8e7c5;
 }
 
-.card-back.black {
-    background: repeating-linear-gradient(
-        45deg,
-        #374151,
-        #374151 5px,
-        #111827 5px,
-        #111827 10px
-    );
+/* Inner decorative border */
+.card-back::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 2px solid #f8e7c5;
+    border-radius: 3px;
 }
 
-/* Revealed card colours */
-.card.red {
-    color: #dc2626;
+/* Central decorative symbol */
+.card-back::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: #f8e7c5;
+    font-size: 35px;
+    text-shadow: 0 0 5px rgba(255,255,255,0.4);
 }
 
-.card.black {
+/* --------------------------------
+   CARD FACE DESIGN
+-------------------------------- */
+
+.card-face {
+    background: #fffdf7;
+    border: 1px solid #d1d5db;
     color: #111827;
 }
 
-/* Card rank */
-.card .rank {
+/* Top-left and bottom-right corners */
+.card-corner {
     position: absolute;
-    top: 5px;
-    left: 6px;
-    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
 }
 
-/* Card suit */
-.card .suit {
-    font-size: 30px;
+.card-corner.top {
+    top: 7px;
+    left: 7px;
 }
 
-/* Buttons */
+.card-corner.bottom {
+    bottom: 7px;
+    right: 7px;
+    transform: rotate(180deg);
+}
+
+/* Large central suit */
+.card-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 43px;
+}
+
+/* Red and black suits */
+.card-face.red {
+    color: #c1122f;
+}
+
+.card-face.black {
+    color: #111827;
+}
+
+/* --------------------------------
+   BUTTONS
+-------------------------------- */
+
 .buttons {
     display: flex;
     gap: 15px;
@@ -153,7 +205,6 @@ button {
     flex: 1;
 }
 
-/* Higher button */
 #higher {
     background: #2563eb;
 }
@@ -162,7 +213,6 @@ button {
     background: #1d4ed8;
 }
 
-/* Lower button */
 #lower {
     background: #dc2626;
 }
@@ -171,12 +221,10 @@ button {
     background: #b91c1c;
 }
 
-/* Button hover */
 button:hover {
     transform: translateY(-2px);
 }
 
-/* Disabled buttons */
 button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
