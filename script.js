@@ -294,7 +294,7 @@ function startGame() {
 }
 
 
-// Make a higher or lower guess
+
 function makeGuess(guess) {
     if (gameOver || cardsRevealed >= TOTAL_CARDS) {
         return;
@@ -307,32 +307,34 @@ function makeGuess(guess) {
 
     cardsRevealed++;
 
+    let correct = false;
+
     // Check the guess
     if (nextCard.value === currentCard.value) {
+        correct = true;
+
         document.getElementById("message").textContent =
             "Same value! You continue!";
-
-        playCorrectSound();
     }
 
     else if (
         guess === "higher" &&
         nextCard.value > currentCard.value
     ) {
+        correct = true;
+
         document.getElementById("message").textContent =
             "Correct! The card is higher!";
-
-        playCorrectSound();
     }
 
     else if (
         guess === "lower" &&
         nextCard.value < currentCard.value
     ) {
+        correct = true;
+
         document.getElementById("message").textContent =
             "Correct! The card is lower!";
-
-        playCorrectSound();
     }
 
     else {
@@ -353,14 +355,23 @@ function makeGuess(guess) {
 
     updateScore();
 
-    // Check whether all ten cards have been revealed
+    // Have all ten cards been revealed?
     if (cardsRevealed === TOTAL_CARDS) {
         document.getElementById("message").textContent =
-            "Amazing! You revealed all 10 cards!";
+            "YOU WIN! Amazing! All 10 cards revealed!";
+
+        playWinSound();
+        launchConfetti();
 
         endGame();
     }
+
+    else {
+        // Ordinary correct-answer sound
+        playCorrectSound();
+    }
 }
+
 
 
 // Update score
