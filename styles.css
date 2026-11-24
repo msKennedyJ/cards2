@@ -13,75 +13,100 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
 }
 
 /* Game container */
 .game-container {
     background: #1f2937;
     width: 100%;
-    max-width: 900px;
-    min-height: 460px;
-    padding: 35px;
-    border-radius: 16px;
+    max-width: 1250px;
+    min-height: 600px;
+    padding: 55px 45px;
+    border-radius: 20px;
     border: 1px solid #374151;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 35px;
 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 /* Heading */
 h1 {
     color: #f9fafb;
-    font-size: 32px;
+    font-size: 42px;
     text-align: center;
 }
 
 p {
     color: #9ca3af;
-    font-size: 16px;
+    font-size: 19px;
     text-align: center;
 }
 
 /* Cards wrapper */
 .cards-wrapper {
     width: 100%;
+    padding: 15px 0;
     overflow-x: auto;
-    padding: 10px 0 15px;
 }
 
 /* Row of cards */
 .cards-row {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     min-width: max-content;
-    padding: 0 5px;
+    padding: 5px;
 }
 
-/* Individual card */
+/* Card positioning */
 .card {
-    position: relative;
-    width: 75px;
-    height: 115px;
+    width: 100px;
+    height: 150px;
     flex-shrink: 0;
 
-    border-radius: 8px;
+    perspective: 1000px;
+}
+
+/* The rotating part of the card */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    transform-style: preserve-3d;
+    transition: transform 0.65s ease;
+}
+
+/* Flip the card */
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Both card sides */
+.card-front,
+.card-back {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 10px;
     overflow: hidden;
 
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* --------------------------------
-   CARD BACK DESIGN
+   CARD BACK
 -------------------------------- */
 
-/* Same back design for every card */
 .card-back {
     background-color: #a3132a;
 
@@ -101,19 +126,19 @@ p {
             rgba(255,255,255,0.15) 5px
         );
 
-    border: 3px solid #f8e7c5;
+    border: 4px solid #f8e7c5;
 }
 
-/* Inner decorative border */
+/* Inner border */
 .card-back::before {
     content: "";
     position: absolute;
-    inset: 5px;
+    inset: 7px;
     border: 2px solid #f8e7c5;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
-/* Central decorative symbol */
+/* Decorative centre */
 .card-back::after {
     content: "✦";
     position: absolute;
@@ -122,58 +147,58 @@ p {
     transform: translate(-50%, -50%);
 
     color: #f8e7c5;
-    font-size: 35px;
-    text-shadow: 0 0 5px rgba(255,255,255,0.4);
+    font-size: 45px;
 }
 
 /* --------------------------------
-   CARD FACE DESIGN
+   CARD FRONT
 -------------------------------- */
 
-.card-face {
+.card-front {
     background: #fffdf7;
     border: 1px solid #d1d5db;
-    color: #111827;
+
+    transform: rotateY(180deg);
 }
 
-/* Top-left and bottom-right corners */
+/* Card corners */
 .card-corner {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
-    line-height: 1;
+    line-height: 1.05;
 }
 
 .card-corner.top {
-    top: 7px;
-    left: 7px;
+    top: 9px;
+    left: 9px;
 }
 
 .card-corner.bottom {
-    bottom: 7px;
-    right: 7px;
+    bottom: 9px;
+    right: 9px;
     transform: rotate(180deg);
 }
 
-/* Large central suit */
+/* Centre suit */
 .card-center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 43px;
+    font-size: 58px;
 }
 
-/* Red and black suits */
-.card-face.red {
+/* Suit colours */
+.card-front.red {
     color: #c1122f;
 }
 
-.card-face.black {
+.card-front.black {
     color: #111827;
 }
 
@@ -183,18 +208,18 @@ p {
 
 .buttons {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     width: 100%;
-    max-width: 350px;
+    max-width: 450px;
 }
 
 button {
-    padding: 14px;
+    padding: 17px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
 
     color: white;
-    font-size: 16px;
+    font-size: 19px;
     font-weight: 600;
 
     cursor: pointer;
@@ -222,7 +247,7 @@ button {
 }
 
 button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
 button:disabled {
@@ -234,14 +259,15 @@ button:disabled {
 /* Message */
 #message {
     color: #60a5fa;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 600;
-    min-height: 25px;
+    min-height: 28px;
 }
 
 /* Score */
 #score {
     color: #f9fafb;
+    font-size: 19px;
     font-weight: bold;
 }
 
@@ -249,7 +275,7 @@ button:disabled {
 #playAgain {
     background: #10b981;
     width: 100%;
-    max-width: 350px;
+    max-width: 450px;
     display: none;
     flex: 0 0 auto;
 }
@@ -258,17 +284,9 @@ button:disabled {
     background: #059669;
 }
 
-/* Smaller screens */
-@media (max-width: 600px) {
-    .game-container {
-        padding: 25px 15px;
-    }
-
-    h1 {
-        font-size: 26px;
-    }
-
-    .cards-row {
-        justify-content: flex-start;
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .card-inner {
+        transition: none;
     }
 }
