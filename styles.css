@@ -324,3 +324,33 @@ button:disabled {
 #score {
     flex: 0 0 auto;
 }
+/* Score and Play Again share the same space */
+.bottom-area {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    height: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Score occupies the shared space */
+#score {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+/* Play Again occupies exactly the same space */
+#playAgain {
+    position: absolute;
+    width: 100%;
+    max-width: 450px;
+    margin: 0;
+
+    display: none;
+    flex: none;
+}
