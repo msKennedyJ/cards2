@@ -289,3 +289,11 @@ button:disabled {
         transition: none;
     }
 }
+.buttons {
+    flex: 0 0 auto;
+}
+
+#message,
+#score {
+    flex: 0 0 auto;
+}
