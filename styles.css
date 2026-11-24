@@ -1,0 +1,226 @@
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #111827;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Game container */
+.game-container {
+    background: #1f2937;
+    width: 100%;
+    max-width: 850px;
+    min-height: 430px;
+    padding: 35px;
+    border-radius: 16px;
+    border: 1px solid #374151;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Heading */
+h1 {
+    color: #f9fafb;
+    font-size: 32px;
+    text-align: center;
+}
+
+/* Paragraphs */
+p {
+    color: #9ca3af;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Cards wrapper */
+.cards-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px 0 15px;
+}
+
+/* Row of cards */
+.cards-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-width: max-content;
+    padding: 0 5px;
+}
+
+/* Individual card */
+.card {
+    position: relative;
+    width: 65px;
+    height: 105px;
+    flex-shrink: 0;
+
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+    background: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Card backs */
+.card-back {
+    border: 3px solid white;
+    background: repeating-linear-gradient(
+        45deg,
+        #b91c1c,
+        #b91c1c 5px,
+        #7f1d1d 5px,
+        #7f1d1d 10px
+    );
+}
+
+.card-back.black {
+    background: repeating-linear-gradient(
+        45deg,
+        #374151,
+        #374151 5px,
+        #111827 5px,
+        #111827 10px
+    );
+}
+
+/* Revealed card colours */
+.card.red {
+    color: #dc2626;
+}
+
+.card.black {
+    color: #111827;
+}
+
+/* Card rank */
+.card .rank {
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    font-size: 13px;
+}
+
+/* Card suit */
+.card .suit {
+    font-size: 30px;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+}
+
+button {
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buttons button {
+    flex: 1;
+}
+
+/* Higher button */
+#higher {
+    background: #2563eb;
+}
+
+#higher:hover {
+    background: #1d4ed8;
+}
+
+/* Lower button */
+#lower {
+    background: #dc2626;
+}
+
+#lower:hover {
+    background: #b91c1c;
+}
+
+/* Button hover */
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* Disabled buttons */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Message */
+#message {
+    color: #60a5fa;
+    font-size: 18px;
+    font-weight: 600;
+    min-height: 25px;
+}
+
+/* Score */
+#score {
+    color: #f9fafb;
+    font-weight: bold;
+}
+
+/* Play Again */
+#playAgain {
+    background: #10b981;
+    width: 100%;
+    max-width: 350px;
+    display: none;
+    flex: 0 0 auto;
+}
+
+#playAgain:hover {
+    background: #059669;
+}
+
+/* Smaller screens */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 25px 15px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .cards-row {
+        justify-content: flex-start;
+    }
+}
