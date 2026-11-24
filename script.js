@@ -28,7 +28,7 @@ function getAudioContext() {
 }
 
 
-// Satisfying correct-answer sound
+// Correct-answer sound
 function playCorrectSound() {
     const audio = getAudioContext();
     const now = audio.currentTime;
@@ -62,7 +62,7 @@ function playCorrectSound() {
 }
 
 
-// Gentle sad sound for losing
+// Losing sound
 function playLoseSound() {
     const audio = getAudioContext();
     const now = audio.currentTime;
@@ -141,7 +141,7 @@ function createDeck() {
 }
 
 
-// Create the ten card spaces
+// Create ten card spaces
 function createCardSlots() {
     const cardsRow = document.getElementById("cardsRow");
 
@@ -150,21 +150,32 @@ function createCardSlots() {
     for (let i = 0; i < TOTAL_CARDS; i++) {
         const card = document.createElement("div");
 
-        card.className = "card card-back";
+        card.className = "card";
         card.id = `card-${i}`;
+
+        card.innerHTML = `
+            <div class="card-inner">
+
+                <div class="card-back"></div>
+
+                <div class="card-front"></div>
+
+            </div>
+        `;
 
         cardsRow.appendChild(card);
     }
 }
 
 
-// Display a revealed card
+// Display and flip a card
 function displayCard(card, position) {
     const cardElement = document.getElementById(`card-${position}`);
+    const cardFront = cardElement.querySelector(".card-front");
 
-    cardElement.className = `card card-face ${card.colour}`;
+    cardFront.className = `card-front ${card.colour}`;
 
-    cardElement.innerHTML = `
+    cardFront.innerHTML = `
         <div class="card-corner top">
             <span>${card.name}</span>
             <span>${card.symbol}</span>
@@ -177,6 +188,9 @@ function displayCard(card, position) {
             <span>${card.symbol}</span>
         </div>
     `;
+
+    // Trigger the flip animation
+    cardElement.classList.add("flipped");
 }
 
 
@@ -216,7 +230,7 @@ function makeGuess(guess) {
 
     const nextCard = deck.pop();
 
-    // Reveal the next card
+    // Reveal and flip the next card
     displayCard(nextCard, cardsRevealed);
 
     cardsRevealed++;
@@ -277,14 +291,14 @@ function makeGuess(guess) {
 }
 
 
-// Update the score
+// Update score
 function updateScore() {
     document.getElementById("score").textContent =
         `Cards revealed: ${cardsRevealed} / ${TOTAL_CARDS}`;
 }
 
 
-// End the game
+// End game
 function endGame() {
     gameOver = true;
 
@@ -295,5 +309,5 @@ function endGame() {
 }
 
 
-// Start the game when the page loads
+// Start game when page loads
 startGame();
